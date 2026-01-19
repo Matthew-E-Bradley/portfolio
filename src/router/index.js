@@ -19,10 +19,21 @@ const router = createRouter({
   name: 'portfolio',
   component: () => import('../views/PortfolioView.vue'),
 },
+
 {
-  path: '/gallery',
-  name: 'gallery',
-  component: () => import('../views/GalleryView.vue'),
+  path: '/gallery/record-fair',
+  name: 'gallery-record-fair',
+  component: () => import('../components/GalleryRecordFair.vue'),
+},
+{
+  path: '/gallery/logos',
+  name: 'gallery-logos',
+  component: () => import('../components/GalleryLogos.vue'),
+},
+{
+  path: '/gallery/posters',
+  name: 'gallery-posters',
+  component: () => import('../components/GalleryPosters.vue'),
 },
   ],
 })

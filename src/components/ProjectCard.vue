@@ -1,4 +1,8 @@
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const props = defineProps({
   id: [String, Number],
   title: { type: String, required: true },
@@ -7,6 +11,18 @@ const props = defineProps({
   image: { type: String, default: null },
   link: { type: String, default: null }
 })
+
+const viewGallery = () => {
+  const galleryMap = {
+    1: 'gallery-record-fair',
+    2: 'gallery-logos',
+    3: 'gallery-posters'
+  }
+  const routeName = galleryMap[props.id]
+  if (routeName) {
+    router.push({ name: routeName })
+  }
+}
 </script>
 
 <template>
@@ -23,7 +39,8 @@ const props = defineProps({
       </ul>
 
       <div class="actions">
-        <a v-if="link" :href="link" target="_blank" rel="noopener">View</a>
+        <button v-if="id" @click="viewGallery" class="view-btn">View</button>
+        <a v-else-if="link" :href="link" target="_blank" rel="noopener">View</a>
       </div>
     </div>
   </article>
@@ -91,9 +108,20 @@ h3 {
   margin-top: 0.5rem;
 }
 
-.actions a {
+.actions a,
+.view-btn {
   font-weight: 600;
   color: var(--color-text);
   text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.actions a:hover,
+.view-btn:hover {
+  opacity: 0.7;
 }
 </style>
